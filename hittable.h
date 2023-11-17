@@ -1,13 +1,17 @@
 #ifndef HITTABLE_H
 #define HITTABLE_H
 
-#include "ray.h"
+
+#include "rtweekend.h"
+
+class material; // tell the compiler that material is a class which will be defined later.
 
 class hit_record {
     public:
         point3 p; // the 3D point that the was hit
         vec3 normal; // the normal towards the point which was hit?
         double t; // the t value which gives you the hit
+        shared_ptr<material> mat;
         bool front_face; // Decided that the normals always point against the ray, so we need to store the information.
 
         void set_face_normal(const ray& r, const vec3& outward_normal) {
