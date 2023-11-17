@@ -6,10 +6,26 @@
 
 using color = vec3;
 
-// Utility function that writes a single pixel's color out to the standard output stream.
-void write_color(std::ostream &out, color pixel_color){
+
+void write_color(std::ostream &out, color pixel_color, int samples_per_pixel){
     // Write the translated [0,255] value of each color component.
-    out << static_cast<int>(255.999 * pixel_color.x()) << ' ' << static_cast<int>(255.999 * pixel_color.y()) << ' ' << static_cast<int>(255.999 * pixel_color.z()) << '\n';
+
+    // the colours of each rgb value 
+    auto r = pixel_color.x();
+    auto g = pixel_color.y();
+    auto b = pixel_color.z();
+
+    // divide the colour by the number of samples
+    auto scale = 1.0 / samples_per_pixel;
+    r *= scale;
+    g *= scale;
+    b *= scale;
+
+    //  object of the class interval where the constructor takes in min(+infinity), max(-infinity)
+    static const interval intensity(0.000,0.999);
+
+
+    out << static_cast<int>(256 * intensity.clamp(r)) << ' ' << static_cast<int>(256 * intensity.clamp(b)) << ' ' << static_cast<int>(256 * intensity.clamp(g)) << '\n';
 }
 
 
