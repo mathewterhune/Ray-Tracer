@@ -20,7 +20,7 @@ $(OBJ): $(SRC) $(HEADERS)
 
 # run the target file
 run: $(TARGET)
-	./$(TARGET) > image_9.5.ppm
+	./$(TARGET)
 
 # 'clean' target for cleaning up
 clean:
