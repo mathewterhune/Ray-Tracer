@@ -20,7 +20,7 @@ $(OBJ): $(SRC) $(HEADERS)
 
 # run the target file
 run: $(TARGET)
-	./$(TARGET)
+	./$(TARGET) > image.png
 
 # 'clean' target for cleaning up
 clean:

@@ -16,6 +16,8 @@ public:
     int samples_per_pixel = 10; // cont of random samples for each pixel (used for antialiasing)
     int max_depth = 10;         // used to limit the number of ray bounces into scene
 
+    double vfov = 90; // vertical view angle (field of view)
+
     void render(const hittable &world) {
         initialize();
 
@@ -47,12 +49,17 @@ private:
         image_height = static_cast<int>(image_width / aspect_ratio);
         image_height = (image_height < 1) ? 1 : image_height;
 
+                     // (x,y,z)
         center = point3(0, 0, 0);
 
         // Determine viewport dimensions.
         auto focal_length = 1; // distance from the camera to the viewport, must be higher tha one otherwise it the center will be behind the camera
-        auto viewport_height = 2.0;
+        auto theta = degrees_to_radians(vfov);
+        auto h = tan(theta/2);
+        auto viewport_height = 2 * h * focal_length;
         auto viewport_width = viewport_height * (static_cast<double>(image_width) / image_height);
+
+
 
         // Calculate the vectors across the horizontal and down the vertical viewport edges.
         auto viewport_u = vec3(viewport_width, 0, 0);
