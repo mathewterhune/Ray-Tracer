@@ -19,9 +19,12 @@ $(OBJ): $(SRC) $(HEADERS)
 
 
 # run the target file
-run: $(TARGET)
-	./$(TARGET) > image.png
+run:$(TARGET)
+	$(TARGET) > image.ppm
 
 # 'clean' target for cleaning up
 clean:
 	rm -f $(TARGET) $(OBJ)
+
+
+	
